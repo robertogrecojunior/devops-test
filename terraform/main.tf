@@ -1,9 +1,19 @@
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.0"
+    }
+  }
+}
+
 provider "docker" {}
 
 resource "docker_image" "devops_test" {
-  name = "devops-test"
+  name = "devops-test:latest"
+
   build {
-    context = ".."
+    context = "${path.module}/.."
   }
 }
 

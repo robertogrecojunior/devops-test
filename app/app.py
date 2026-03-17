@@ -30,18 +30,17 @@ def log_request(endpoint, status):
     }
     print(json.dumps(log_entry))
 
-
 @app.before_request
 def start_timer():
     request.start_time = time.time()
 
-
 @app.after_request
 def record_latency(response):
     latency = time.time() - request.start_time
-    REQUEST_LATENCY.labels(endpoint=request.path).observe(latency)
-    return response
-
+    REQUEST_LATENCY.labels(
+    method=request.method,
+    endpoint=request.path
+).observe(latency)
 
 @app.route("/")
 def home():
@@ -49,13 +48,11 @@ def home():
     log_request("/", 200)
     return jsonify({"message": "DevOps Test Running"})
 
-
 @app.route("/health")
 def health():
     REQUEST_COUNT.labels(method="GET", endpoint="/health").inc()
     log_request("/health", 200)
     return jsonify({"status": "alive"})
-
 
 @app.route("/ready")
 def ready():
@@ -63,11 +60,9 @@ def ready():
     log_request("/ready", 200)
     return jsonify({"status": "ready"})
 
-
 @app.route("/metrics")
 def metrics():
     return generate_latest(), 200, {"Content-Type": CONTENT_TYPE_LATEST}
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)

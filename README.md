@@ -62,6 +62,8 @@ terraform apply
 curl localhost:8080
 ```
 
+---
+
 ## 🏛️ Arquitetura
 
 O fluxo de deploy segue o seguinte modelo:

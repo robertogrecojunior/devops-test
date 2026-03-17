@@ -241,7 +241,7 @@ terraform {
 
 ## 🔄 Pipeline CI/CD
 
-O pipeline é executado via **GitHub Actions**, acionado automaticamente a cada push na branch `main`.
+A pipeline poderá ser executada via **GitHub Actions**, acionada automaticamente a cada push na branch `main`, ou manualmente sem a necessidade de novo commit.
 
 ### Etapas do Pipeline
 

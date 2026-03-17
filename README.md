@@ -21,6 +21,7 @@
 ## 📋 Índice
 
 - [Visão Geral](#-visão-geral)
+- [Execução Rápida - Local](#-execução-rápida-local)
 - [Arquitetura](#-arquitetura)
 - [Aplicação & Endpoints](#-aplicação--endpoints)
 - [Observabilidade](#-observabilidade)
@@ -50,6 +51,17 @@ O resultado positivo do teste é demonstrado na chamada http://localhost:8080 no
 
 ---
 
+## ⚙️ Execução Rápida - Local
+
+```bash
+git clone <repo>
+cd terraform
+terraform init
+terraform apply
+
+curl localhost:8080
+```
+
 ## 🏛️ Arquitetura
 
 O fluxo de deploy segue o seguinte modelo:
@@ -63,17 +75,17 @@ Push do Desenvolvedor
         ▼
   GitHub Actions Pipeline
         │
+        ├── Checkout do código
+        ├── Build da imagem Docker
+        ├── Criação de Container de Teste
+        ├── Chamada na aplicação para validação
+        ├── Remoção do Container de Teste
+        ├── Setup Terraform
         ├── Terraform Init
-        ├── Terraform Format Validation
-        ├── Terraform Plan
-        ├── ✋ Aprovação manual (Environment Gate)
         └── Terraform Apply
                 │
                 ▼
-        Build da imagem Docker
-                │
-                ▼
-        Criação do container
+        Validação da aplicação provisionada pelo Terraform
                 │
                 ▼
         Aplicação Flask em execução 🚀
@@ -129,7 +141,7 @@ Compatível com ferramentas como **Prometheus**, **Grafana**, **Datadog** e **Ne
 
 ## 📡 Observabilidade
 
-Este projeto implementa os três pilares básicos de observabilidade:
+Este projeto implementa fundamentos de observabilidade alinhados com práticas modernas:
 
 ### 1. Logs Estruturados
 
@@ -154,6 +166,7 @@ Métricas Prometheus expostas via `/metrics`, permitindo monitoramento de:
 
 - Volume de requisições por endpoint e método HTTP
 - Comportamento e performance do serviço
+- Latência das requisições por endpoint e método HTTP (Histogram)
 
 ### 3. Health Checks
 
@@ -254,8 +267,6 @@ A pipeline poderá ser executada via **GitHub Actions**, acionada automaticament
 6. Terraform Apply
 ```
 
-O **Environment Gate** na etapa de aprovação manual garante que nenhum deploy ocorra sem revisão humana, adicionando uma camada de controle ao processo de release.
-
 ---
 
 ## 🔒 Segurança
@@ -298,7 +309,7 @@ devops-test/
 | Tecnologia        | Versão / Detalhes          | Finalidade                         |
 |-------------------|----------------------------|------------------------------------|
 | Python            | 3.11                       | Linguagem da aplicação             |
-| Flask             | 2.x                        | Framework web                      |
+| Flask             | 3.x                        | Framework web                      |
 | Docker            | Imagem `python:3.11-slim`  | Containerização                    |
 | Terraform         | Provider Docker            | Infraestrutura como código         |
 | GitHub Actions    | —                          | CI/CD                              |

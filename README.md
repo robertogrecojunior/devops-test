@@ -246,13 +246,12 @@ A pipeline poderá ser executada via **GitHub Actions**, acionada automaticament
 ### Etapas do Pipeline
 
 ```
-1. 📥  Checkout do repositório
-2. 🔧  Terraform Init
-3. ✅  Validação de formatação (terraform fmt)
-4. 📋  Terraform Plan
-5. ✋  Aprovação manual (Environment Gate)
-6. 🚀  Terraform Apply
-7. 🩺  Verificação de saúde da aplicação
+1. Checkout do repositório
+2. Build da Imagem
+3. Verificação de saúde da aplicação
+4. Terraform Init
+5. Terraform Plan
+6. Terraform Apply
 ```
 
 O **Environment Gate** na etapa de aprovação manual garante que nenhum deploy ocorra sem revisão humana, adicionando uma camada de controle ao processo de release.

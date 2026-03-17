@@ -23,7 +23,25 @@ jobs:
           sleep 5
 
       - name: Teste simples da aplicação
-        run: curl http://localhost:8080
+        run: |
+          echo "Acessando aplicação..."
+          
+          for i in {1..10}; do
+            RESPONSE=$(curl -s http://localhost:8080)
+      
+            if [ ! -z "$RESPONSE" ]; then
+              echo "Resposta da aplicação:"
+              echo "$RESPONSE"
+              exit 0
+            fi
+      
+            echo "Aguardando aplicação subir..."
+            sleep 2
+          done
+      
+          echo "Falha ao acessar aplicação"
+          docker logs devops-test-container
+          exit 1
 
       - name: Remover container de teste
         run: docker rm -f devops-test-container

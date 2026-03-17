@@ -40,8 +40,8 @@ def record_latency(response):
     REQUEST_LATENCY.labels(
     method=request.method,
     endpoint=request.path
-).observe(latency)
-return response
+    ).observe(latency)
+    return response
 
 @app.route("/")
 def home():

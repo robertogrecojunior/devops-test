@@ -21,7 +21,7 @@
 ## 📋 Índice
 
 - [Visão Geral](#-visão-geral)
-- [Execução Rápida](#-execução-rápida)
+- [Execução Rápida](#execução-rápida)
 - [Arquitetura](#-arquitetura)
 - [Aplicação & Endpoints](#-aplicação--endpoints)
 - [Observabilidade](#-observabilidade)

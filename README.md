@@ -48,7 +48,7 @@ Este repositório demonstra um fluxo completo de práticas DevOps modernas, indo
 NOTA: Os runners do GitHub Actions são ambientes efêmeros e isolados, portanto, o aplicativo não é acessível externamente. Para acesso via navegador, seria necessário um ambiente de produção real.
 O resultado positivo do teste é demonstrado na chamada http://localhost:8080 no momento da execução da pipeline.
 
-### Execução Rápida
+### Execução Rápida (Teste Local)
 
 ```bash
 git clone <repo>

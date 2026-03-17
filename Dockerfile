@@ -8,6 +8,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app/ .
 
+# Create non-root user
+RUN useradd -m appuser
+
+# Switch to non-root user
+USER appuser
+
 EXPOSE 8080
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s CMD curl -f http://localhost:8080/health || exit 1

@@ -21,7 +21,7 @@
 ## 📋 Índice
 
 - [Visão Geral](#-visão-geral)
-- [Execução Rápida - Local](#-execução-rápida-local)
+- [Execução Rápida](#-execução-rápida)
 - [Arquitetura](#-arquitetura)
 - [Aplicação & Endpoints](#-aplicação--endpoints)
 - [Observabilidade](#-observabilidade)
@@ -51,7 +51,7 @@ O resultado positivo do teste é demonstrado na chamada http://localhost:8080 no
 
 ---
 
-## ⚙️ Execução Rápida - Local
+## ⚙️ Execução Rápida
 
 ```bash
 git clone <repo>

@@ -11,6 +11,9 @@ COPY app/ .
 # Create non-root user
 RUN useradd -m appuser
 
+# dá permissão na pasta
+RUN chown -R appuser:appuser /app
+
 # Switch to non-root user
 USER appuser
 

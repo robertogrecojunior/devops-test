@@ -16,7 +16,7 @@ REQUEST_COUNT = Counter(
 REQUEST_LATENCY = Histogram(
     "http_request_duration_seconds",
     "Tempo de resposta das requisições HTTP",
-    ["endpoint"]
+    ["method", "endpoint"]
 )
 
 def log_request(endpoint, status):

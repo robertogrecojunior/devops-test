@@ -14,30 +14,36 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v3
 
+      # =========================
+      # BUILD DA IMAGEM
+      # =========================
       - name: Build da imagem Docker
         run: docker build -t devops-test .
 
+      # =========================
+      # TESTE DA APLICAÇÃO
+      # =========================
       - name: Subir container para teste
-        run: |
-          docker run -d -p 8080:8080 --name devops-test-container devops-test
-          sleep 5
+        run: docker run -d -p 8080:8080 --name devops-test-container devops-test
 
       - name: Teste simples da aplicação
         run: |
           echo "Aguardando aplicação subir..."
-     
           sleep 5
-      
-          echo "Chamando aplicaç�:"
+
+          echo "Chamando aplicação:"
           curl http://localhost:8080
-      
+
           echo ""
-	  echo "Logs do container:"
+          echo "Logs do container:"
           docker logs devops-test-container
 
       - name: Remover container de teste
         run: docker rm -f devops-test-container
 
+      # =========================
+      # TERRAFORM
+      # =========================
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 

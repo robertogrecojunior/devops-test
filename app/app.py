@@ -1,7 +1,8 @@
 import json
 from datetime import datetime
 from flask import Flask, jsonify, request
-from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+import time
 
 app = Flask(__name__)
 
@@ -10,6 +11,12 @@ REQUEST_COUNT = Counter(
     "http_requests_total",
     "Total HTTP Requests",
     ["method", "endpoint"]
+)
+
+REQUEST_LATENCY = Histogram(
+    "http_request_duration_seconds",
+    "Tempo de resposta das requisições HTTP",
+    ["endpoint"]
 )
 
 def log_request(endpoint, status):
@@ -22,6 +29,18 @@ def log_request(endpoint, status):
         "remote_addr": request.remote_addr
     }
     print(json.dumps(log_entry))
+
+
+@app.before_request
+def start_timer():
+    request.start_time = time.time()
+
+
+@app.after_request
+def record_latency(response):
+    latency = time.time() - request.start_time
+    REQUEST_LATENCY.labels(endpoint=request.path).observe(latency)
+    return response
 
 
 @app.route("/")

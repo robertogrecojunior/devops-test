@@ -1,0 +1,10 @@
+.git
+.gitignore
+
+terraform
+*.tfstate
+*.tfstate.backup
+
+README.md
+
+.github

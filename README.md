@@ -255,15 +255,17 @@ terraform {
 
 A pipeline poderá ser executada via **GitHub Actions**, acionada automaticamente a cada push na branch `main`, ou manualmente sem a necessidade de novo commit.
 
-### Etapas do Pipeline
+### Etapas da Pipeline
 
 ```
 1. Checkout do repositório
 2. Build da Imagem
-3. Verificação de saúde da aplicação
-4. Terraform Init
-5. Terraform Plan
-6. Terraform Apply
+3. Criação do container
+4. Verificação de saúde da aplicação
+5. Destruição do container
+6. Terraform Init
+7. Terraform Apply
+6. verificação da saúde da aplicação criada via Terraform
 ```
 
 ---

@@ -54,3 +54,10 @@ jobs:
       - name: Terraform Apply
         working-directory: terraform
         run: terraform apply -auto-approve
+
+      - name: Validar aplicação provisionada pelo Terraform
+        run: |
+          echo "Aguardando aplicação provisionada subir..."
+          sleep 5
+          echo "Resposta da aplicação após Terraform:"
+          curl http://localhost:8080
